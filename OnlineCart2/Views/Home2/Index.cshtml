@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_fontend.cshtml";
+}
+
+<div class="maincontent-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="latest-product">
+                    <h2 class="section-title">Latest Products</h2>
+                    <div class="product-carousel">
+                        @foreach (var pro in ViewBag.p) {
+                            <div class="single-product">
+                                <div class="product-f-image">
+                                    @foreach (var img in ViewBag.imgs) {
+                                        if (img.pid == pro.pid) {
+                                            <img src="~/Content/Images/@img.iname" height="200">
+                                            break;
+                                        }
+                                    }
+
+                                    <div class="product-hover">
+                                        <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                        <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                    </div>
+                                </div>
+
+                                <h2><a href="@Url.Action("single", new { id = @pro.pid })">@pro.pname</a></h2>
+
+                                <div class="product-carousel-price">
+                                    <ins>@pro.pprice৳</ins> <del>$100.00</del>
+                                </div>
+                            </div>
+                        }
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End main content area -->
