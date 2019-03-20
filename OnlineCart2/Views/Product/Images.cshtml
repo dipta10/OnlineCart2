@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Images";
+}
+
+
+@*
+@foreach(var p in @ViewBag.pro) {
+<h2>Add image for @p.pname</h2>
+}
+*@
+
+<h2>Add image for @ViewBag.pro[0].pname</h2>
+
+@{
+    Html.BeginForm("Images", "Product", FormMethod.Post, new {enctype = "multipart/Form-data"});
+
+    <table>
+        <tr>
+            <td>Select image: </td>
+            <input type="hidden" name="id" value="@ViewBag.pro[0].pid"/>
+            <td><input type="file" name="file"/></td>
+            <td><input type="submit" value="save"/></td>
+        </tr>
+    </table>
+}
+
+<hr />
+@if (@ViewBag.imgs != null)  {
+<div>
+    <p>Image found</p>
+    @foreach (var i in @ViewBag.imgs) {
+    <img src="~/Content/Images/@i.iname" alt="Alternate Text" width="100"/>
+    }
+</div>
+} else {
+<div>
+    <p>No images found</p>
+</div>
+}
