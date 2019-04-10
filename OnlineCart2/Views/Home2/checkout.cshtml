@@ -1,0 +1,38 @@
+﻿@model OnlineCart2.tbl_orders
+
+@{
+    ViewBag.Title = "checkout";
+    Layout = "~/Views/Shared/_fontend.cshtml";
+}
+
+<h2>checkout</h2>
+<div class="row">
+    <div class="col-sm-6 col-1 col-sm-offset-3">
+        <table class="table">
+
+@{
+            Html.BeginForm("checkout", "Home2", FormMethod.Post);
+            <tr>
+                <td>Name: </td>
+                <td>@Html.TextBoxFor(a => a.opname)</td>
+            </tr>
+
+            <tr>
+                <td>Phone: </td>
+                <td>@Html.TextBoxFor(a => a.opphone)</td>
+            </tr>
+}
+            <tr>
+                <td>Address: </td>
+                <td>@Html.TextBoxFor(a => a.opaddress)</td>
+            </tr>
+
+            <tr>
+                <td>Shipping Address: </td>
+                <td>@Html.TextBoxFor(a => a.opsaddress)</td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+

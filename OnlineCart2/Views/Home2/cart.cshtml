@@ -1,0 +1,43 @@
+﻿@model OnlineCart2.OnlineCartEntitiesDB
+
+@{
+    ViewBag.Title = "cart";
+    Layout = "~/Views/Shared/_fontend.cshtml";
+}
+
+<h2>Your Cart</h2>
+<table class="table">
+    @{
+        var total = 0;
+        OnlineCartEntitiesDB obj = new OnlineCartEntitiesDB();
+        var it = obj.tbl_product.ToList();
+        foreach (var item in ViewBag.c) {
+            foreach (var i in it) {
+                if (i.pid == item.iid) {
+                    var amt = item.iqty * i.pprice;
+                    <tr>
+                        <td>@i.pname</td>
+                        <td>@i.pprice</td>
+                        <td>@item.iqty</td>
+                        <td>@amt</td>
+                    </tr>
+                    total += amt;
+                }
+            }
+        }
+
+        if (total == 0) {
+          <h1>Your cart is empty! </h1>
+        } else {
+            <tr>
+                <td></td>
+                <td></td>
+                <td>
+                    @Html.ActionLink("Checkout", "checkout", "Home2"); 
+                </td>
+                <td>@total</td>
+            </tr>
+        }
+
+    }
+</table>

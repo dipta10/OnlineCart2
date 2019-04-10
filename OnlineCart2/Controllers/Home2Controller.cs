@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using OnlineCart2;
+using OnlineCart2.Models;
 
 namespace OnlineCart2.Controllers
 {
@@ -47,6 +48,27 @@ namespace OnlineCart2.Controllers
 
         public ActionResult About (int id) {
 
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult cart (string pid, string pqty) {
+
+            foreach (var item in ok.c) {
+                if (item.iid == int.Parse(pid)) {
+                    item.iqty += int.Parse(pqty);
+                ViewBag.c = ok.c;
+                return View();
+                }
+            }
+
+            cartitem i = new cartitem() { iid = int.Parse(pid), iqty = int.Parse(pqty) };
+            ok.c.Add(i);
+            ViewBag.c = ok.c;
+            return View();
+        }
+
+        public ActionResult checkout () {
             return View();
         }
     }
