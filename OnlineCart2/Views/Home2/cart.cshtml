@@ -29,11 +29,16 @@
         if (total == 0) {
           <h1>Your cart is empty! </h1>
         } else {
+            @Html.BeginForm("checkout", "Home2", FormMethod.Post);
             <tr>
                 <td></td>
                 <td></td>
                 <td>
-                    @Html.ActionLink("Checkout", "checkout", "Home2"); 
+                    @*
+                     @Html.ActionLink("Checkout", "checkout", "Home2", new { amt = total } );
+                    *@
+                    <input type="hidden" value="@total" name="total"/>
+                    <input type="submit" value="Checkout" class="btn btn-success btn-sm"/>
                 </td>
                 <td>@total</td>
             </tr>

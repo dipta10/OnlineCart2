@@ -51,8 +51,14 @@ namespace OnlineCart2.Controllers
             return View();
         }
 
-        [HttpPost]
         public ActionResult cart (string pid, string pqty) {
+            if (pid == null || pqty == null) {
+                ViewBag.c = ok.c;
+                return View();
+            }
+            if (pid == "0" && pqty == "0") {
+                return View();
+            }
 
             foreach (var item in ok.c) {
                 if (item.iid == int.Parse(pid)) {
@@ -68,8 +74,52 @@ namespace OnlineCart2.Controllers
             return View();
         }
 
-        public ActionResult checkout () {
+        [HttpPost]
+        public ActionResult checkout (string total) {
+            ViewBag.g = total;
             return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult doneorder(tbl_orders tb, string total) {
+
+            tbl_orders obj = new tbl_orders();
+            obj.opname = tb.opname;
+            obj.opphone = tb.opphone;
+            obj.opaddress = tb.opaddress;
+            obj.opsaddress = tb.opsaddress;
+            obj.ostatus = 0;
+            // obj.oamount = int.Parse(total);
+            obj.oamount = total;
+            db.tbl_orders.Add(obj);
+            db.SaveChanges();
+
+            var moid = db.tbl_orders.Select(a=>a.oid).DefaultIfEmpty(0).Max();
+
+
+            var pro = from prod in ok.c
+                      join od in db.tbl_product
+                      on prod.iid equals od.pid
+                      select new {PID = od.pid, PPRICE = od.pprice, PQTY = prod.iqty };
+
+
+            foreach (var item in pro) {
+                tbl_order_details orderdetails = new tbl_order_details();
+
+                orderdetails.oid = moid;
+                orderdetails.pid = item.PID;
+                orderdetails.pprice = item.PPRICE;
+                orderdetails.pqty = item.PQTY;
+                orderdetails.pamount = item.PQTY * item.PPRICE;
+
+                db.tbl_order_details.Add(orderdetails);
+                db.SaveChanges();
+            }
+
+
+            return RedirectToAction("Index");
+
         }
     }
 }
