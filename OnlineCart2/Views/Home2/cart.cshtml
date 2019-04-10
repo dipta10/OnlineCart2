@@ -1,4 +1,6 @@
-﻿@model OnlineCart2.OnlineCartEntitiesDB
+﻿@using OnlineCart2.Models
+
+@model OnlineCart2.OnlineCartEntitiesDB
 
 @{
     ViewBag.Title = "cart";
@@ -15,7 +17,15 @@
             foreach (var i in it) {
                 if (i.pid == item.iid) {
                     var amt = item.iqty * i.pprice;
+
                     <tr>
+                        <td>
+                        @{
+                            Html.BeginForm("remove", "Home2", FormMethod.Post);
+                            <input type="hidden" value="@i.pid" name="pid" />
+                            <input type="submit" class="btn btn-danger" value="remove" />
+                        }
+                        </td>
                         <td>@i.pname</td>
                         <td>@i.pprice</td>
                         <td>@item.iqty</td>
@@ -26,19 +36,19 @@
             }
         }
 
+
+        ok.amt = total;
+
         if (total == 0) {
-          <h1>Your cart is empty! </h1>
+            <h1>Your cart is empty! </h1>
         } else {
-            @Html.BeginForm("checkout", "Home2", FormMethod.Post);
+            Html.BeginForm("checkout", "Home2", FormMethod.Post);
             <tr>
                 <td></td>
                 <td></td>
                 <td>
-                    @*
-                     @Html.ActionLink("Checkout", "checkout", "Home2", new { amt = total } );
-                    *@
-                    <input type="hidden" value="@total" name="total"/>
-                    <input type="submit" value="Checkout" class="btn btn-success btn-sm"/>
+                    <input type="hidden" value="@total" name="total" />
+                    <input type="submit" value="Checkout" class="btn btn-success btn-sm" />
                 </td>
                 <td>@total</td>
             </tr>

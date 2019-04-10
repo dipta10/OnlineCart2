@@ -80,6 +80,17 @@ namespace OnlineCart2.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult remove (string pid) {
+            int id = int.Parse(pid);
+
+            var item = ok.c.SingleOrDefault(x => x.iid == id);
+            if (item != null)
+                ok.c.Remove(item);
+
+            return RedirectToAction("cart");
+        }
+
 
         [HttpPost]
         public ActionResult doneorder(tbl_orders tb, string total) {
@@ -117,6 +128,8 @@ namespace OnlineCart2.Controllers
                 db.SaveChanges();
             }
 
+            ok.amt = 0;
+            ok.c.Clear();
 
             return RedirectToAction("Index");
 

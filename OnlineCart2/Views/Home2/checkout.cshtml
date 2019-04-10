@@ -13,6 +13,7 @@
 @{
             var t = ViewBag.t;
             Html.BeginForm("doneorder", "Home2", FormMethod.Post);
+
             <tr>
                 <td>Name: </td>
                 <td>@Html.TextBoxFor(a => a.opname)</td>
@@ -34,7 +35,7 @@
 
             <tr>
                 <td>Total Amount</td>
-                <td>@Html.TextBox("total", new { t })</td>
+                <td>@Html.TextBox("total", new { t})</td>
             </tr>
             <tr>
                 <td></td>

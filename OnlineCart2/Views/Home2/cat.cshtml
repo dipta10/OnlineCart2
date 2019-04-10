@@ -28,11 +28,11 @@
 
                                     <div class="product-hover">
                                         <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                        <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                        <a href="@Url.Action("pro", new { id = @pro.pid })" class="view-details-link"><i class="fa fa-link"></i> See details</a>
                                     </div>
                                 </div>
 
-                                <h2><a href="@Url.Action("single", new { id = @pro.pid })">@pro.pname</a></h2>
+                                <h2><a href="@Url.Action("pro", new { id = @pro.pid })">@pro.pname</a></h2>
 
                                 <div class="product-carousel-price">
                                     <ins>@pro.pprice৳</ins> <del>$100.00</del>

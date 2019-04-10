@@ -5,6 +5,7 @@ using System.Web;
 
 namespace OnlineCart2.Models {
     public class ok {
+        public static int amt = 0;
         public static List <cartitem> c = new List<cartitem>();
     }
     public class cartitem {
