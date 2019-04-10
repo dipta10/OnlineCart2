@@ -34,6 +34,17 @@ namespace OnlineCart2.Controllers
             return View();
         }
 
+
+        public ActionResult pro(int id) {
+            var p = db.tbl_product.Where(l => l.pid == id).ToList();
+            ViewBag.p = p;
+            var imgs = db.tbl_images.Where(l => l.pid == id).ToList();
+            ViewBag.imgs = imgs;
+            Console.WriteLine("this is from PRO!");
+
+            return View();
+        }
+
         public ActionResult About (int id) {
 
             return View();

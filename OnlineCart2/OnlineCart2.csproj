@@ -292,6 +292,7 @@
     <Content Include="Views\Shared\_fontend.cshtml" />
     <Content Include="Views\Home2\Index.cshtml" />
     <Content Include="Views\Home2\cat.cshtml" />
+    <Content Include="Views\Home2\pro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
